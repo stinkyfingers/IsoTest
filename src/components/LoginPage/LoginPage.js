@@ -14,6 +14,11 @@ import s from './LoginPage.scss';
 const title = 'Log In';
 
 class LoginPage extends Component {
+  constructor(){
+    super();
+    this.inputChange = this.inputChange.bind(this);
+    this.submit = this.submit.bind(this);
+  }
 
   static contextTypes = {
     onSetTitle: PropTypes.func.isRequired,
@@ -23,12 +28,42 @@ class LoginPage extends Component {
     this.context.onSetTitle(title);
   }
 
+  submit(event){
+    console.log(this.state);
+    fetch('http://localhost:8080/user', {
+      method: 'POST',
+      body: JSON.stringify({
+        email: this.state.email,
+        password: this.state.password
+      })
+    })
+      .then((resp) => resp.json())
+      .then((resp) => {
+        console.log(resp)
+      });
+  }
+
+  inputChange(event){
+    console.log(event.target.name);
+    var field = event.target.name;
+    if (field === 'email'){
+      this.setState({email: event.target.value});
+    }
+    if (field === 'password'){
+      this.setState({password: event.target.value});
+    }
+  }
+
   render() {
     return (
       <div className={s.root}>
         <div className={s.container}>
           <h1>{title}</h1>
-          <p>...</p>
+          <label for="email">Email: </label>
+          <input type="text" name="email" onChange={this.inputChange}/>
+          <label for="password">Password: </label>
+          <input type="text" name="password" onChange={this.inputChange}/>
+          <button name="submit" onClick={this.submit}>Submit</button>
         </div>
       </div>
     );

@@ -29,7 +29,6 @@ class LoginPage extends Component {
   }
 
   submit(event){
-    console.log(this.state);
     fetch('http://localhost:8080/user', {
       method: 'POST',
       body: JSON.stringify({
@@ -39,12 +38,19 @@ class LoginPage extends Component {
     })
       .then((resp) => resp.json())
       .then((resp) => {
-        console.log(resp)
+        localStorage.setItem('user.id', resp.id);
+        localStorage.setItem('user.token', resp.token);
+        localStorage.setItem('user.email', resp.email);
+        localStorage.setItem('user.name', resp.name);
+      }).catch(() => {
+        localStorage.removeItem('user.id');
+        localStorage.removeItem('user.token');
+        localStorage.removeItem('user.email');
+        localStorage.removeItem('user.name');
       });
   }
 
   inputChange(event){
-    console.log(event.target.name);
     var field = event.target.name;
     if (field === 'email'){
       this.setState({email: event.target.value});

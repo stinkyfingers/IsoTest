@@ -10,10 +10,16 @@
 import React, { Component, PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './LoginPage.scss';
+import LoginStore from '../../stores/LoginStore';
 
 const title = 'Log In';
 
+
 class LoginPage extends Component {
+  static propTypes  = {
+    email: PropTypes.string,
+    password: PropTypes.string,
+  };
   constructor(){
     super();
     this.inputChange = this.inputChange.bind(this);
@@ -29,25 +35,27 @@ class LoginPage extends Component {
   }
 
   submit(event){
-    fetch('http://localhost:8080/user', {
-      method: 'POST',
-      body: JSON.stringify({
-        email: this.state.email,
-        password: this.state.password
-      })
-    })
-      .then((resp) => resp.json())
-      .then((resp) => {
-        localStorage.setItem('user.id', resp.id);
-        localStorage.setItem('user.token', resp.token);
-        localStorage.setItem('user.email', resp.email);
-        localStorage.setItem('user.name', resp.name);
-      }).catch(() => {
-        localStorage.removeItem('user.id');
-        localStorage.removeItem('user.token');
-        localStorage.removeItem('user.email');
-        localStorage.removeItem('user.name');
-      });
+    console.log(LoginStore)
+    LoginStore.Login(this.state.email, this.state.password)
+    // fetch('http://localhost:8080/user', {
+    //   method: 'POST',
+    //   body: JSON.stringify({
+    //     email: this.state.email,
+    //     password: this.state.password
+    //   })
+    // })
+    //   .then((resp) => resp.json())
+    //   .then((resp) => {
+    //     localStorage.setItem('user.id', resp.id);
+    //     localStorage.setItem('user.token', resp.token);
+    //     localStorage.setItem('user.email', resp.email);
+    //     localStorage.setItem('user.name', resp.name);
+    //   }).catch(() => {
+    //     localStorage.removeItem('user.id');
+    //     localStorage.removeItem('user.token');
+    //     localStorage.removeItem('user.email');
+    //     localStorage.removeItem('user.name');
+    //   });
   }
 
   inputChange(event){

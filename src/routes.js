@@ -14,12 +14,15 @@ import App from './components/App';
 import ContentPage from './components/ContentPage';
 import ContactPage from './components/ContactPage';
 import LoginPage from './components/LoginPage';
+import SongStore from './stores/SongStore';
+import LoginStore from './stores/LoginStore';
 import RegisterPage from './components/RegisterPage';
 import NotFoundPage from './components/NotFoundPage';
 import ErrorPage from './components/ErrorPage';
 
 const router = new Router(on => {
   on('*', async (state, next) => {
+    // console.log(SongStore.getState());
     const component = await next();
     return component && <App context={state.context}>{component}</App>;
   });
@@ -27,6 +30,10 @@ const router = new Router(on => {
   on('/contact', async () => <ContactPage />);
 
   on('/login', async () => <LoginPage />);
+
+  on('/loginuser', async () => {
+    LoginUser.setState();
+  });
 
   on('/register', async () => <RegisterPage />);
 

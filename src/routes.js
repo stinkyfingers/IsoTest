@@ -15,6 +15,7 @@ import ContentPage from './components/ContentPage';
 import ContactPage from './components/ContactPage';
 import LoginPage from './components/LoginPage';
 import SongStore from './stores/SongStore';
+import UserStore from './stores/UserStore';
 import LoginStore from './stores/LoginStore';
 import RegisterPage from './components/RegisterPage';
 import NotFoundPage from './components/NotFoundPage';
@@ -22,7 +23,9 @@ import ErrorPage from './components/ErrorPage';
 
 const router = new Router(on => {
   on('*', async (state, next) => {
-    // console.log(SongStore.getState());
+    console.log(SongStore.getState());
+    console.log(UserStore.getState());
+    UserStore.getState();
     const component = await next();
     return component && <App context={state.context}>{component}</App>;
   });

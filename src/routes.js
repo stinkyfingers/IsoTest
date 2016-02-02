@@ -23,8 +23,6 @@ import ErrorPage from './components/ErrorPage';
 
 const router = new Router(on => {
   on('*', async (state, next) => {
-    console.log(SongStore.getState());
-    console.log(UserStore.getState());
     UserStore.getState();
     const component = await next();
     return component && <App context={state.context}>{component}</App>;

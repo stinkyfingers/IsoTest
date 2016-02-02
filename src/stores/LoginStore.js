@@ -1,6 +1,6 @@
 import fetch from '../core/fetch';
 import events from 'events';
-import dispatcher from '../Dispatchers/App';
+import dispatcher from '../dispatchers/App';
 import LoginActions from '../actions/LoginActions';
 const EventEmitter = events.EventEmitter;
 

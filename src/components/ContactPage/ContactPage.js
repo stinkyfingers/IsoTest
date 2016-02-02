@@ -10,6 +10,7 @@
 import React, { Component, PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './ContactPage.scss';
+import connectToStores from 'alt-utils/lib/connectToStores';
 import UserStore from '../../stores/UserStore';
 
 
@@ -20,34 +21,26 @@ class ContactPage extends Component {
     user: PropTypes.object.isRequired
   };
 
-  static contextTypes = {
-    onSetTitle: PropTypes.func.isRequired,
-  };
-
-  componentWillMount() {
-    this.context.onSetTitle(title);
-  }
-
-
-  getPropsFromStores () {
+  //required for use of connectToStores
+  static getPropsFromStores () {
     return UserStore.getState();
   }
 
-
-
-  getStores (){
+  //required for use of connectToStores
+  static getStores (){
     return [UserStore]
   }
 
- 
+  displayUser () {
+    return(<p>{this.props.user.name}</p>)
+  }
 
   render() {
-    console.log(this.props)
     return (
       <div className={s.root}>
         <div className={s.container}>
           <h1>{title}</h1>
-          <p>...</p>
+          <div>{this.displayUser()}</div>
         </div>
       </div>
     );
@@ -55,4 +48,4 @@ class ContactPage extends Component {
 
 }
 
-export default withStyles(ContactPage, s);
+export default withStyles(connectToStores(ContactPage), s);

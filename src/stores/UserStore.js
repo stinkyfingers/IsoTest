@@ -1,6 +1,6 @@
 import fetch from '../core/fetch';
 import events from 'events';
-import dispatcher from '../Dispatchers/App';
+import dispatcher from '../dispatchers/App';
 import UserActions from '../actions/UserActions';
 const EventEmitter = events.EventEmitter;
 
@@ -8,13 +8,16 @@ const EventEmitter = events.EventEmitter;
 class UserStore extends EventEmitter{
 	constructor(){
 		super();
-		this.get();
+		
 		this.bindListeners({
 			get: UserActions.get,
 		});
+
 		this.state = {
 			user: {}
 		};
+
+		this.get();
 	}
 
  	async get (){

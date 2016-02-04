@@ -19,12 +19,16 @@ class SongStore extends EventEmitter{
 	}
 
  	async get (){
-		const resp = fetch('http://localhost:8080/', {
-			method: 'GET'
-		});
-		this.setState({
-			songs: await resp,
-		});
+ 		try{
+			const resp = fetch('http://localhost:8080/', {
+				method: 'GET'
+			});
+			this.setState({
+				songs: await resp,
+			});
+		}catch(err){
+			console.log(err);
+		}
  	}
 
 }

@@ -14,6 +14,7 @@ import App from './components/App';
 import ContentPage from './components/ContentPage';
 import ContactPage from './components/ContactPage';
 import LoginPage from './components/LoginPage';
+import PeoplePage from './components/PeoplePage';
 import SongStore from './stores/SongStore';
 import UserStore from './stores/UserStore';
 import LoginStore from './stores/LoginStore';
@@ -35,6 +36,8 @@ const router = new Router(on => {
   on('/loginuser', async () => {
     LoginUser.setState();
   });
+
+  on('/people', async () => <PeoplePage />);
 
   on('/register', async () => <RegisterPage />);
 

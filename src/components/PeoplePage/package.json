@@ -1,0 +1,6 @@
+{
+  "name": "PeoplePage",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./PeoplePage.js"
+}

@@ -17,8 +17,8 @@ class PeopleStore extends EventEmitter{
 			get: PeopleActions.get,
 		});
 		this.get(this.state.number);
-		// this.getSome();
-		// this.number = 1;
+
+		this.bindAction(PeopleActions.set, this.set)
 	}
 
  	async get (number){
@@ -29,25 +29,17 @@ class PeopleStore extends EventEmitter{
 			const res = await resp.json();
 			this.setState({
 				people: res.results,
+				number: number
 			});
 		}catch(err){
 			console.log(err);
 		}
  	}
 
- 	// async getSome (number){
- 	// 	try{ 
-		// 	const resp = await fetch('http://randomuser.me/api/?results=' + number, {
-		// 		method: 'GET'
-		// 	});
-		// 	const res = await resp.json();
-		// 	this.setState({
-		// 		people: res.results,
-		// 	});
-		// }catch(err){
-		// 	console.log(err);
-		// }
- 	// }
+ 	set (number){
+ 		this.setState({number});
+ 		this.get(number)
+ 	}
 
 }
 

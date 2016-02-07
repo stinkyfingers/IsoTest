@@ -48,18 +48,18 @@ class PeoplePage extends Component {
   }
 
   handleChange(event){
-    console.log(event.target.value);
     PeopleActions.set(event.target.value)
-    // const people = PeopleStore.set(event.target.value);
-    // console.log(people);
-    // return this.setState(this.PeopleStore)
   }
+
+
 
   render() {
     return (
       <div>People...
         <ul>{this.showPeople()}</ul>
-        <div><select name="numbers" onChange={this.handleChange}>{this.createSelect()}</select></div>
+        <div>
+          <select name="numbers" onChange={this.handleChange}>{this.createSelect()}</select>
+        </div>
       </div>
     );
   }

@@ -1,12 +1,8 @@
 import dispatcher from '../dispatchers/App';
 
 class PeopleActions {
-	get(){
-		return {};
-	}
-	set(number){
-		console.log(number)
-		return number;
+	constructor(){
+		this.generateActions('get','set')
 	}
 }
 

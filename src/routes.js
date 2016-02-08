@@ -15,6 +15,7 @@ import ContentPage from './components/ContentPage';
 import ContactPage from './components/ContactPage';
 import LoginPage from './components/LoginPage';
 import PeoplePage from './components/PeoplePage';
+import WeatherPage from './components/WeatherPage';
 import SongStore from './stores/SongStore';
 import UserStore from './stores/UserStore';
 import LoginStore from './stores/LoginStore';
@@ -40,6 +41,8 @@ const router = new Router(on => {
   on('/people', async () => <PeoplePage />);
 
   on('/register', async () => <RegisterPage />);
+
+  on('/weather', async () => <WeatherPage />);
 
   on('*', async (state) => {
     const response = await fetch(`/api/content?path=${state.path}`);
